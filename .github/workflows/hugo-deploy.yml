@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # 选择 Ubuntu 最新版的虚拟环境
-
+    
     steps:
       # Step 1: 检出代码
       - name: Checkout code
@@ -36,15 +36,20 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # Step 6: 部署到 GitHub Pages
+      
+      # Step 6: 配置身份验证
+      - name: Configure git with the token
+        run: |
+          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+      
+      # Step 7: 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.BLOG }}  # 使用 GitHub 自动生成的 token
           publish_dir: ./public  # Hugo 默认将输出文件放在 ./public 目录
 
-      # Step 7: 检查部署到 gh-pages 分支
+      # Step 8: 检查 gh-pages 分支
       - name: Verify gh-pages branch content
         run: |
           git fetch origin gh-pages
