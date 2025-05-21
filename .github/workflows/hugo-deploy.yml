@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # 选择 Ubuntu 最新版的虚拟环境
-    
+
     steps:
       # Step 1: 检出代码
       - name: Checkout code
@@ -17,7 +17,8 @@ jobs:
       # Step 2: 设置 Hugo 环境
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
-
+        with:
+          hugo-version: '0.91.0'  # 可根据需要指定 Hugo 的版本
 
       # Step 3: 安装依赖
       - name: Install Dependencies
@@ -26,17 +27,26 @@ jobs:
 
       # Step 4: 构建网站
       - name: Build Hugo site
-        run: hugo --minify  # 生成静态文件并最小化
+        run: |
+          hugo --minify  # 生成静态文件并最小化
+          ls -la public  # 输出 public 目录内容，查看生成的文件
 
       # Step 5: 设置 Git 配置
       - name: Set Git config for Git push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      
+
       # Step 6: 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.BLOG }}  # 使用 GitHub 自动生成的 token
           publish_dir: ./public  # Hugo 默认将输出文件放在 ./public 目录
+
+      # Step 7: 检查部署到 gh-pages 分支
+      - name: Verify gh-pages branch content
+        run: |
+          git fetch origin gh-pages
+          git checkout gh-pages
+          ls -la  # 查看 gh-pages 分支的文件，确认是否部署成功
