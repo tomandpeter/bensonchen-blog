@@ -14,49 +14,53 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          submodules: true  # 确保子模块也会被检出
+          submodules: 'recursive'  # 确保子模块也被检出
 
-      # Step 2: 初始化并更新子模块
-      - name: Initialize and update submodules
-        run: |
-          git submodule update --init --recursive  # 初始化并更新子模块
-
-      # Step 3: 设置 Hugo 环境
+      # Step 2: 设置 Hugo 环境
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.91.0'  # 可根据需要指定 Hugo 的版本
 
-      # Step 4: 安装依赖
+      # Step 3: 安装依赖
       - name: Install Dependencies
         run: |
           hugo mod get -u  # 获取 Hugo 模块依赖，适用于带模块的 Hugo 项目
 
-      # Step 5: 构建网站
+      # Step 4: 构建网站
       - name: Build Hugo site
         run: hugo --minify  # 生成静态文件并最小化
 
-      # Step 6: 设置 Git 配置
-      - name: Set Git config for Git push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      
-      # Step 7: 配置身份验证
-      - name: Configure git with the token
-        run: |
-          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
-      
-      # Step 8: 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.BLOG }}  # 使用 GitHub 自动生成的 token
-          publish_dir: ./public  # Hugo 默认将输出文件放在 ./public 目录
+      # Step 5: 强制清除本地修改
+      - name: Discard local changes
+        run: git reset --hard
 
-      # Step 9: 检查 gh-pages 分支
-      - name: Verify gh-pages branch content
+      # Step 6: 切换到 gh-pages 分支
+      - name: Checkout gh-pages branch
         run: |
           git fetch origin gh-pages
           git checkout gh-pages
-          ls -la  # 查看 gh-pages 分支的文件，确认是否部署成功
+
+      # Step 7: 将 public 目录的内容复制到当前目录
+      - name: Copy public files
+        run: cp -R public/* .
+
+      # Step 8: 设置 Git 配置
+      - name: Set Git config for Git push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      # Step 9: 提交并推送到 gh-pages 分支
+      - name: Commit and Push to gh-pages
+        run: |
+          git add .
+          git commit -m "Deploy updated site"
+          git push origin gh-pages
+
+      # Step 10: 使用 GitHub Token 进行认证
+      - name: Authenticate using GitHub token
+        env:
+          GITHUB_TOKEN: ${{ secrets.BLOG }}  # 使用 GitHub 自动生成的 token
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
