@@ -13,43 +13,48 @@ jobs:
       # Step 1: 检出代码
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          submodules: true  # 确保子模块也会被检出
 
-      # Step 2: 设置 Hugo 环境
+      # Step 2: 初始化并更新子模块
+      - name: Initialize and update submodules
+        run: |
+          git submodule update --init --recursive  # 初始化并更新子模块
+
+      # Step 3: 设置 Hugo 环境
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.91.0'  # 可根据需要指定 Hugo 的版本
 
-      # Step 3: 安装依赖
+      # Step 4: 安装依赖
       - name: Install Dependencies
         run: |
           hugo mod get -u  # 获取 Hugo 模块依赖，适用于带模块的 Hugo 项目
 
-      # Step 4: 构建网站
+      # Step 5: 构建网站
       - name: Build Hugo site
-        run: |
-          hugo --minify  # 生成静态文件并最小化
-          ls -la public  # 输出 public 目录内容，查看生成的文件
+        run: hugo --minify  # 生成静态文件并最小化
 
-      # Step 5: 设置 Git 配置
+      # Step 6: 设置 Git 配置
       - name: Set Git config for Git push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       
-      # Step 6: 配置身份验证
+      # Step 7: 配置身份验证
       - name: Configure git with the token
         run: |
           git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
       
-      # Step 7: 部署到 GitHub Pages
+      # Step 8: 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.BLOG }}  # 使用 GitHub 自动生成的 token
           publish_dir: ./public  # Hugo 默认将输出文件放在 ./public 目录
 
-      # Step 8: 检查 gh-pages 分支
+      # Step 9: 检查 gh-pages 分支
       - name: Verify gh-pages branch content
         run: |
           git fetch origin gh-pages
