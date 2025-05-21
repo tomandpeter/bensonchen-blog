@@ -27,7 +27,9 @@ jobs:
 
       # Step 4: 构建网站
       - name: Build Hugo site
-        run: hugo --minify  # 生成静态文件并最小化
+        run: |
+          hugo --minify  # 生成静态文件并最小化
+          ls -la public  # 打印 public 目录内容，帮助我们调试是否生成了
 
       # Step 5: 强制清除本地修改
       - name: Discard local changes
@@ -41,7 +43,9 @@ jobs:
 
       # Step 7: 将 public 目录的内容复制到当前目录
       - name: Copy public files
-        run: cp -R public/* .
+        run: |
+          ls -la public  # 确认 public 目录存在
+          cp -R public/* .  # 复制 public 目录下的内容
 
       # Step 8: 设置 Git 配置
       - name: Set Git config for Git push
