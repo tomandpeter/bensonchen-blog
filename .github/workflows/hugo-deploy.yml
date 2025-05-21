@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          submodules: 'recursive'  # 确保子模块被正确检出，尤其是 themes 子模块
+          submodules: 'recursive'  # 确保子模块被递归地检出
 
       # Step 2: 设置 Hugo 环境
       - name: Set up Hugo
