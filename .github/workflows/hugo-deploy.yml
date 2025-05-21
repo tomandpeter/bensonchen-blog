@@ -68,13 +68,12 @@ jobs:
         run: |
           git reset --hard  # 清理工作区，避免因冲突导致失败
 
+      # Step 10: 复制 public 目录的内容到 gh-pages 分支
       - name: Add public to gh-pages
         run: |
-          # 删除旧的 public 目录内容，避免冲突
-          rm -rf *  # 删除当前目录内容
-          cp -R ../public/* .  # 将 public 目录的内容复制到 gh-pages 分支中
+          cp -R ./public/* ./  # 将 public 目录的内容复制到当前工作目录（gh-pages 分支）
 
-      # Step 10: 提交并推送到 gh-pages
+      # Step 11: 提交并推送到 gh-pages
       - name: Commit and push changes to gh-pages
         run: |
           git add .
