@@ -36,11 +36,11 @@ jobs:
       - name: Build Hugo site
         run: |
           hugo --minify  # 生成静态文件并最小化
-          
+
       # Step 6: 列出 public 目录，确认文件生成
       - name: List contents of public directory
         run: |
-          ls -la public  # 确保 public 目录中的文件已生成
+          ls -la ./public  # 确保 public 目录中的文件已生成
 
       # Step 7: 配置 Git
       - name: Set Git config for Git push
@@ -68,10 +68,10 @@ jobs:
         run: |
           git reset --hard  # 清理工作区，避免因冲突导致失败
 
-      # Step 10: 复制 public 目录的内容到 gh-pages 分支
+      # Step 10: 复制 public 目录的内容到 gh-pages
       - name: Add public to gh-pages
         run: |
-          cp -R ./public/* ./  # 将 public 目录的内容复制到当前工作目录（gh-pages 分支）
+          if [ -d "./public" ]; then cp -R ./public/* ./; else echo "public directory not found"; fi  # 确保 public 目录存在后才复制
 
       # Step 11: 提交并推送到 gh-pages
       - name: Commit and push changes to gh-pages
