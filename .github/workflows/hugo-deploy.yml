@@ -1,0 +1,36 @@
+name: Build and Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main  # 每当主分支有推送时触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 选择 Ubuntu 最新版的虚拟环境
+    
+    steps:
+      # Step 1: 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: 设置 Hugo 环境
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+
+
+      # Step 3: 安装依赖
+      - name: Install Dependencies
+        run: |
+          hugo mod get -u  # 获取 Hugo 模块依赖，适用于带模块的 Hugo 项目
+
+      # Step 4: 构建网站
+      - name: Build Hugo site
+        run: hugo --minify  # 生成静态文件并最小化
+
+      # Step 5: 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub Token 来进行推送
+          publish_dir: ./public  # Hugo 默认将输出文件放在 ./public 目录
