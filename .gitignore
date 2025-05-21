@@ -17,3 +17,4 @@ hugo_stats.json
 # 日志或临时文件
 *.log
 
+.DS_Store
