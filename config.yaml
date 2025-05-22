@@ -1,14 +1,14 @@
-baseurl: /
-languageCode: zh-CN
-title: 我的博客
-theme: hugo-ivy
-ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
-preserveTaxonomyNames: true
-footnotereturnlinkcontents: ↩
+baseurl: https://my.medprober.com/  # 设置为博客的真实 URL
+languageCode: zh-CN  # 设置语言为中文
+title: 我的博客  # 博客的标题
+theme: hugo-ivy  # 使用的主题
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]  # 忽略的文件类型
+preserveTaxonomyNames: true  # 保留分类名称不进行翻译
+footnotereturnlinkcontents: ↩  # 脚注返回链接的内容
 
 permalinks:
-  note: /note/:year/:month/:day/:slug/
-  post: /post/:year/:month/:day/:slug/
+  note: /note/:year/:month/:day/:slug/  # 笔记类型文章的 URL 模式
+  post: /post/:year/:month/:day/:slug/  # 博客文章的 URL 模式
 
 menu:
   main:
@@ -26,17 +26,18 @@ menu:
       weight: 4
     - name: "订阅"
       url: "/index.xml"
+      weight: 5
 
 params:
   description: "A Hugo theme ported from the static site generator Ivy."
-  footer: "&copy; [Benson Chen](https://my.medprober.com) 2017-{Year} | [Github](https://github.com/)"
-  highlightjsLang: ["latex"]
-  highlightjsTheme: "github"
-  highlightjsVersion: "11.7.0"
+  footer: "&copy; [Benson Chen](https://my.medprober.com) 2017-{Year} | [Github](https://github.com/)"  # 自定义页脚
+  highlightjsLang: ["latex"]  # 高亮支持的语言
+  highlightjsTheme: "github"  # 高亮主题
+  highlightjsVersion: "11.7.0"  # 高亮的版本
 
 markup:
   highlight:
-    codeFences: false
+    codeFences: false  # 禁用代码块的 HTML 标签（通过 markdown 语法生成的代码块）
   goldmark:
     renderer:
-      unsafe: true
+      unsafe: true  # 允许 HTML 标签嵌入 Markdown 文件中
