@@ -1,0 +1,76 @@
+name: Build and Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main  # 每当主分支有推送时触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 选择 Ubuntu 最新版的虚拟环境
+    
+    steps:
+      # Step 1: 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'  # 确保子模块被递归地检出
+
+      # Step 2: 设置 Hugo 环境
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.91.0'  # 使用指定版本的 Hugo
+
+      # Step 3: 安装依赖
+      - name: Install Dependencies
+        run: |
+          hugo mod get -u  # 获取 Hugo 模块依赖，适用于带模块的 Hugo 项目
+
+      # Step 4: 构建网站
+      - name: Build Hugo site
+        run: |
+          hugo --minify  # 生成静态文件并最小化
+
+      # Step 5: 列出 public 目录，确认文件生成
+      - name: List contents of public directory
+        run: |
+          ls -la ./public  # 确保 public 目录中的文件已生成
+
+      # Step 6: 配置 Git
+      - name: Set Git config for Git push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 7: 使用 Personal Access Token 进行认证
+      - name: Authenticate using Personal Access Token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # 使用存储在 Secrets 中的 PAT
+        run: |
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git  # 使用 PAT 配置 Git 认证
+
+      # Step 8: 强制切换到 gh-pages 分支并处理可能的冲突
+      - name: Fetch gh-pages branch
+        run: |
+          git fetch origin gh-pages  # 获取 gh-pages 分支
+
+      - name: Checkout gh-pages branch
+        run: |
+          git checkout gh-pages || git checkout --orphan gh-pages  # 强制切换到 gh-pages 分支，如果该分支不存在则创建
+
+      - name: Clean up gh-pages branch
+        run: |
+          git reset --hard  # 清理工作区，避免因冲突导致失败
+
+      # Step 9: 复制 public 目录的内容到 gh-pages
+      - name: Add public to gh-pages
+        run: |
+          if [ -d "./public" ]; then cp -R ./public/* ./; else echo "public directory not found"; fi  # 确保 public 目录存在后才复制
+
+      # Step 10: 提交并推送到 gh-pages
+      - name: Commit and push changes to gh-pages
+        run: |
+          git add .
+          git commit -m "Deploy Hugo site to GitHub Pages"
+          git push origin gh-pages  # 推送更改到 gh-pages 分支
