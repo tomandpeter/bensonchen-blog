@@ -29,7 +29,7 @@ menu:
       weight: 5
 
 params:
-  description: "A Hugo theme ported from the static site generator Ivy."
+  description: "人生即便是一场梦幻，也不能没有安慰"
   footer: "&copy; [Benson Chen](https://my.medprober.com) 2017-{Year} | [Github](https://github.com/)"  # 自定义页脚
   highlightjsLang: ["latex"]  # 高亮支持的语言
   highlightjsTheme: "github"  # 高亮主题
