@@ -38,7 +38,7 @@ blockquote {
   .poem-bg {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: url('https://cdn.pixabay.com/photo/2017/03/09/12/31/bamboo-2123923_1280.jpg') no-repeat center center;
+    background: url('/img/sushi.png') no-repeat center center;
     background-size: cover;
     filter: grayscale(100%) contrast(0.8) brightness(0.9);
     opacity: 0.15;
