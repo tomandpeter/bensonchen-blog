@@ -8,3 +8,39 @@ blockquote {
     border-left: 3px solid #ddd;
     font-family: KaiTi, '楷体', '楷体_GB2312', serif; /* 设置楷体字体 */
 }
+
+/* ---------首页动画--------- */
+@import url('https://fonts.googleapis.com/css2?family=KaiTi&display=swap');
+
+  .poem-container {
+    max-width: 700px;
+    margin: 3em auto;
+    padding: 2em 3em;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    font-family: 'KaiTi', serif;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #222;
+    position: relative;
+    animation: fadeInText 3s ease forwards;
+  }
+
+  /* 渐显动画 */
+  @keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(20px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+  /* 背景水墨画 - 使用绝对定位覆盖整个页面 */
+  .poem-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('https://cdn.pixabay.com/photo/2017/03/09/12/31/bamboo-2123923_1280.jpg') no-repeat center center;
+    background-size: cover;
+    filter: grayscale(100%) contrast(0.8) brightness(0.9);
+    opacity: 0.15;
+    z-index: -1;
+  }
