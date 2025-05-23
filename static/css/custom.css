@@ -10,9 +10,7 @@ blockquote {
 }
 
 /* ---------首页动画--------- */
-@import url('https://fonts.googleapis.com/css2?family=KaiTi&display=swap');
-
-  .poem-container {
+.poem-container {
     max-width: 700px;
     margin: 3em auto;
     padding: 2em 3em;
@@ -20,22 +18,22 @@ blockquote {
     border: 1.5px solid #ccc;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    font-family: 'KaiTi', serif;
+    font-family: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif;
     font-size: 1.25rem;
     line-height: 1.7;
     color: #222;
     position: relative;
     animation: fadeInText 3s ease forwards;
-  }
+}
 
-  /* 渐显动画 */
-  @keyframes fadeInText {
+/* 渐显动画 */
+@keyframes fadeInText {
     0% { opacity: 0; transform: translateY(20px);}
     100% { opacity: 1; transform: translateY(0);}
-  }
+}
 
-  /* 背景水墨画 - 使用绝对定位覆盖整个页面 */
-  .poem-bg {
+/* 背景水墨画 */
+.poem-bg {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: url('/img/sushi.png') no-repeat center center;
@@ -43,4 +41,4 @@ blockquote {
     filter: grayscale(100%) contrast(0.8) brightness(0.9);
     opacity: 0.15;
     z-index: -1;
-  }
+}
