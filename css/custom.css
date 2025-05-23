@@ -9,38 +9,60 @@ blockquote {
     font-family: KaiTi, '楷体', '楷体_GB2312', serif; /* 设置楷体字体 */
 }
 
-/* ---------首页动画--------- */
+/* ---------首页自定义样式--------- */
+/* 诗词容器样式 */
 .poem-container {
-    max-width: 700px;
-    margin: 3em auto;
-    padding: 2em 3em;
-    background: rgba(255, 255, 255, 0.85);
-    border: 1.5px solid #ccc;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    font-family: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif;
-    font-size: 1.25rem;
-    line-height: 1.7;
-    color: #222;
-    position: relative;
-    animation: fadeInText 3s ease forwards;
+  max-width: 700px;
+  margin: 3em auto;
+  padding: 2em 3em;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  font-family: 'KaiTi', serif;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #222;
+  position: relative;
+  animation: fadeInText 3s ease forwards;
 }
 
 /* 渐显动画 */
 @keyframes fadeInText {
-    0% { opacity: 0; transform: translateY(20px);}
-    100% { opacity: 1; transform: translateY(0);}
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
 }
 
-/* 背景水墨画 */
+/* 背景水墨画统一样式 */
 .poem-bg {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: url('/img/sushi.png') no-repeat center center;
-  background-size: auto 100%;
+  background: no-repeat center center;
+  background-size: cover;
   background-attachment: fixed;
-  filter: grayscale(100%) contrast(0.8) brightness(0.9);
-  opacity: 0.25;
+  filter: grayscale(100%) contrast(0.85) brightness(0.95);
+  opacity: 0.22;
   z-index: -1;
+}
+
+/* PC桌面版 */
+@media (min-width: 1025px) {
+  .poem-bg {
+    background-image: url('/img/sushi-desktop.png');
+  }
+}
+
+/* 平板版 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .poem-bg {
+    background-image: url('/img/sushi-tablet.png');
+  }
+}
+
+/* 手机版 */
+@media (max-width: 767px) {
+  .poem-bg {
+    background-image: url('/img/sushi-mobile.png');
+  }
 }
 
