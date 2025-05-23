@@ -19,7 +19,7 @@ blockquote {
   border: 1.5px solid #ccc;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  font-family: 'KaiTi', serif;
+  font-family: KaiTi, '楷体', '楷体_GB2312', serif;
   font-size: 1.25rem;
   line-height: 1.7;
   color: #222;
