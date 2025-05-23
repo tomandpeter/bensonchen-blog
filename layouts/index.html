@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/custom.css" />
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
 
 {{ partial "header.html" . }}
 
@@ -12,9 +12,25 @@
     竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。<br>
     料峭春风吹酒醒，微冷，山头斜照却相迎。<br>
     回首向来萧瑟处，归去，也无风雨也无晴。<br>
-    <em> 宋 苏轼</em>
+    <em class="author-signature"> 宋 苏轼</em>
   </p>
 </div>
 
 {{ partial "footer.html" . }}
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const poemBg = document.querySelector('.poem-bg');
+    // 确保元素存在
+    if (poemBg) {
+      // 监听窗口滚动事件
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        // 视差滚动速度，值越小背景移动越慢，视差效果越明显
+        const parallaxSpeed = 0.3;
+        // 使用 translate3d 开启硬件加速，使滚动更流畅
+        poemBg.style.transform = `translate3d(0, ${-scrollPosition * parallaxSpeed}px, 0)`;
+      });
+    }
+  });
+</script>
