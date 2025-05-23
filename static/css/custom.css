@@ -21,7 +21,7 @@ blockquote {
   --border-radius-large: 12px; /* 大圆角 */
   --spacing-medium: 2em; /* 中等内边距 */
   --spacing-large: 3em; /* 大外边距 */
-  --font-poem: 'Noto Serif SC', "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体 */
+  --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体，首选楷体 */
   --font-base: 'Inter', sans-serif; /* 基础字体，可用于网站其他部分 */
   --poem-font-size-desktop: 1.25rem; /* 桌面端诗词字体大小 */
   --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
