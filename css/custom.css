@@ -34,11 +34,12 @@ blockquote {
 
 /* 背景水墨画 */
 .poem-bg {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url('/img/sushi.png') no-repeat center center;
-    background-size: cover;
-    filter: grayscale(100%) contrast(0.8) brightness(0.9);
-    opacity: 0.15;
-    z-index: -1;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('/img/sushi.png') no-repeat center center;
+  background-size: contain;
+  background-attachment: fixed;
+  filter: grayscale(100%) contrast(0.8) brightness(0.9);
+  opacity: 0.2;
+  z-index: -1;
 }
