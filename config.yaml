@@ -24,9 +24,16 @@ menu:
     - name: "标签"
       url: "/tags/"
       weight: 4
-    - name: "订阅"
-      url: "/index.xml"
+    # - name: "订阅"
+    #   url: "/index.xml"
+    #   weight: 5
+    - name: "文章"
+      url: "/post/"
       weight: 5
+    - name: "笔记"
+      url: "/note/"
+      weight: 6
+
 
 params:
   description: "人生即便是一场梦幻，也不能没有安慰"
