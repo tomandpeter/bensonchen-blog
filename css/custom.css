@@ -137,11 +137,13 @@ body {
 /* === 针对 .masthead .tagline 类，取消斜体 === */
 .masthead .tagline { 
   font-style: normal; /* 关键：取消斜体，让文字直立 */
+  color: #AAAAAA; /* 字体变浅 */
 }
 /* 手机端适配：同样确保手机上也是直立的 */
 @media (max-width: 767px) {
   .masthead .tagline { 
     font-style: normal; 
+    color: #AAAAAA; /* 手机端字体变浅 */
   }
 }
 
