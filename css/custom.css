@@ -117,25 +117,11 @@ body {
 /* === 针对 .tagline 类，移除斜体并调整样式 === */
 .masthead .tagline { 
   font-style: normal; /* 确保取消斜体 */
-  font-weight: 500; */ /* 根据你的喜好设置 */
-  color: #555; */ /* 根据你的喜好设置 */
-  max-width: 600px; 
-  margin: 2em auto; 
-  padding: 0.5em 1em; 
-  color: rgba(255, 255, 255, 0.8); 
-  font-size: 1.25em; 
-  line-height: 1.6; 
-  text-align: center; 
-  letter-spacing: 0.05em; 
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.6); 
 }
 
 /* 手机端适配：同样修改选择器以保持优先级一致 */
 @media (max-width: 767px) {
   .masthead .tagline { /* 确保这里也是 .masthead .tagline */
     font-style: normal; 
-    font-size: 1.1em; 
-    margin: 1.5em auto;
-    padding: 0.4em 0.8em;
   }
 }
