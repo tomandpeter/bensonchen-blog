@@ -29,35 +29,38 @@ body {
 }
 
 /* === 修改：诗词文本容器样式，移除卡片效果 === */
+/* 诗词文本容器样式 */
 .poem-text-container {
   max-width: 700px;
   margin: 5vh auto; /* 调整上下外边距，使其在页面中部 */
   padding: var(--spacing-medium) var(--spacing-large); /* 内部边距 */
-  font-family: var(--font-poem); /* 应用诗词字体 */
-  font-size: var(--poem-font-size-desktop);
-  line-height: var(--poem-line-height-desktop);
-  color: var(--primary-text-color); /* 诗词文本颜色，与 body 颜色保持一致 */
+  color: var(--primary-text-color); /* 诗词文本颜色 */
   position: relative; /* 确保创建堆叠上下文 */
   z-index: 1; /* 确保诗词文本在最上层，位于背景图和效果层之上 */
   animation: fadeInText 3s ease forwards;
   text-align: center; /* 居中显示诗歌文本 */
-  white-space: pre-wrap; /* 保留 <pre> 标签中的空白和换行 */
+  /* white-space: pre-wrap; 从这里移除，移到 .poem-content */
 }
 
-/* 诗词落款样式 */
-.poem-text-container .author-signature { /* 注意：选择器已更新为 .poem-text-container */
-  display: block; /* 让落款单独占一行 */
-  text-align: right; /* 右对齐 */
-  margin-top: 1.5em; /* 与诗词内容保持距离 */
-  font-size: 0.9em; /* 相对诗词内容小一点 */
-  color: var(--secondary-text-color); /* 颜色稍淡 */
-  font-style: normal; /* 确保不倾斜，如果字体自带斜体效果则不需要 */
-  letter-spacing: 0.05em; /* 稍微增加字间距，提升美感 */
+/* === 新增/修改：应用于 <pre class="poem-content"> 的样式 === */
+.poem-text-container .poem-content {
+  font-family: var(--font-poem); /* 应用诗词字体 */
+  font-size: var(--poem-font-size-desktop); /* 应用桌面端字体大小 */
+  line-height: var(--poem-line-height-desktop); /* 应用桌面端行高 */
+  white-space: pre-wrap; /* 保留空白和换行 */
+  /* 可以移除 <pre> 默认的 margin-top/bottom 如果你发现有多余的空白 */
+  margin-top: 0;
+  margin-bottom: 0;
 }
-
-/* 竖排诗词容器 (如果不再使用，可以删除此段，避免冗余) */
-.poem-icontainer {
-  /* ... (原有竖排样式，如果不再使用可以删除) ... */
+/* 诗词落款样式 (选择器更新为 .poem-text-container .author-signature) */
+.poem-text-container .author-signature {
+  display: block;
+  text-align: right;
+  margin-top: 1.5em;
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
+  font-style: normal;
+  letter-spacing: 0.05em;
 }
 
 /* 渐显动画 */
@@ -91,9 +94,11 @@ body {
 /* 手机版 */
 @media (max-width: 767px) {
   .poem-bg { background-image: url('/img/sushi-mobile.png'); }
-  .poem-text-container {
+  .poem-text-container .poem-content { /* 注意：这里是 .poem-text-container .poem-content */
     font-size: var(--poem-font-size-mobile);
     line-height: var(--poem-line-height-mobile);
+  }
+  .poem-text-container { /* 手机版容器内边距 */
     padding: 1.5em 2em;
   }
 }
