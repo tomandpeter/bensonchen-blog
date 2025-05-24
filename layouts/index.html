@@ -4,9 +4,10 @@
 
 <div class="poem-bg" aria-hidden="true"></div>
 
-<canvas id="rippleCanvas" class="effect-layer"></canvas>
-
-<div id="petalContainer" class="effect-layer"></div>
+<div id="moonRiverContainer" class="effect-layer">
+  <div id="moon"></div>
+  <canvas id="riverCanvas"></canvas>
+</div>
 
 <div class="poem-container" role="article" aria-label="张若虚《春江花月夜》诗词">
   <p>
@@ -36,6 +37,6 @@
 
 {{ partial "footer.html" . }}
   
- <script src="/js/effects.js"></script>
+<script src="/js/moonRiver.js"></script>
 
 
