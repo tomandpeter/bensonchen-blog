@@ -19,8 +19,6 @@
   --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
   --poem-font-size-mobile: 1.1rem; /* 手机端诗词字体大小 */
   --poem-line-height-mobile: 1.6; /* 手机端行高 */
-  --petal-width: 15px; /* 定义花瓣宽度变量 */
-  --petal-height: 20px; /* 定义花瓣高度变量 */
 }
 
 body {
@@ -104,51 +102,4 @@ body {
   }
 }
 
-/* --- 月光江波效果的样式 --- */
-.effect-layer { /* 保持这个基础样式 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-}
 
-#moonRiverContainer {
-  /* 确保 z-index 在背景图之上，在诗词文本之下 */
-  z-index: -1; 
-}
-
-div#moon { /* 提高优先级，确保样式生效 */
-  position: absolute;
-  top: 10vh; /* 初始位置：页面顶部 10% 的高度 */
-  left: 50vw; /* 初始位置：水平居中 */
-  width: 80px; /* 确保宽度 */
-  height: 80px; /* 确保高度 */
-  border-radius: 50%; /* 圆形 */
-  background-color: rgba(255, 255, 220, 0.8); /* 柔和的月光颜色 */
-  box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); /* 初始光晕 */
-  transform: translate(-50%, -50%); /* 居中 */
-}
-
-/* 关键：月光光晕动画 */
-@keyframes moonGlow {
-  0% { box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); }
-  50% { box-shadow: 0 0 60px 30px rgba(255, 255, 220, 0.4); } /* 光晕扩散，变淡 */
-  100% { box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); }
-}
-div#moon { /* 动画应用到 #moon 元素 */
-  animation: moonGlow 5s infinite alternate; 
-}
-
-
-/* === 关键：riverCanvas 的新样式和定位 === */
-#riverCanvas {
-  position: absolute; /* 相对于其父容器 moonRiverContainer 定位 */
-  top: 40vh; /* 从视口高度的 40% 处开始 */
-  left: 0;
-  width: 100vw; /* 占据整个视口宽度 */
-  height: 60vh; /* 占据视口底部 60% 的高度作为江面 */
-  /* background-color: rgba(0, 0, 0, 0.6) !important; /* 临时背景色，调试用，调试完成后请删除或注释 */
-  z-index: 0; /* 确保 Canvas 在 moonRiverContainer 内部的正确层级，高于 moon */
-}
