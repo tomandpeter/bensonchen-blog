@@ -10,70 +10,127 @@ blockquote {
 }
 
 /* ---------首页自定义样式--------- */
+/* 定义 CSS 变量，便于统一管理和修改主题样式 */
+:root {
+  --primary-text-color: #222; /* 主要文字颜色 */
+  --secondary-text-color: #666; /* 次要文字颜色，用于落款等 */
+  --container-bg-color: rgba(255, 255, 255, 0.85); /* 诗词容器背景色 */
+  --container-border-color: #ccc; /* 诗词容器边框颜色 */
+  --container-shadow-color: rgba(0, 0, 0, 0.15); /* 诗词容器阴影颜色 */
+  --border-radius-large: 12px; /* 大圆角 */
+  --spacing-medium: 2em; /* 中等内边距 */
+  --spacing-large: 3em; /* 大外边距 */
+  --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体，首选楷体 */
+  --font-base: 'Inter', sans-serif; /* 基础字体，可用于网站其他部分 */
+  --poem-font-size-desktop: 1.25rem; /* 桌面端诗词字体大小 */
+  --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
+  --poem-font-size-mobile: 1.1rem; /* 手机端诗词字体大小 */
+  --poem-line-height-mobile: 1.6; /* 手机端诗词行高 */
+}
 
 body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: #0d1b2a;
-  color: #eee;
-  font-family: "STKaiti", "KaiTi", "仿宋", serif;
+  font-family: var(--font-base); /* 应用基础字体 */
 }
 
-#background {
+/* 诗词容器样式 */
+.poem-container {
+  max-width: 700px;
+  margin: var(--spacing-large) auto;
+  padding: var(--spacing-medium) var(--spacing-large);
+  background: var(--container-bg-color);
+  border: 1.5px solid var(--container-border-color);
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 6px 15px var(--container-shadow-color);
+  font-family: var(--font-poem); /* 应用诗词字体 */
+  font-size: var(--poem-font-size-desktop);
+  line-height: var(--poem-line-height-desktop);
+  color: var(--primary-text-color);
+  position: relative;
+  animation: fadeInText 3s ease forwards;
+  /* 添加背景模糊效果，提升技术感和美感 */
+  backdrop-filter: blur(8px); /* 模糊度可调整 */
+  -webkit-backdrop-filter: blur(8px); /* 兼容 Safari */
+}
+
+/* 诗词落款样式 */
+.poem-container .author-signature {
+  display: block; /* 让落款单独占一行 */
+  text-align: right; /* 右对齐 */
+  margin-top: 1.5em; /* 与诗词内容保持距离 */
+  font-size: 0.9em; /* 相对诗词内容小一点 */
+  color: var(--secondary-text-color); /* 颜色稍淡 */
+  font-style: normal; /* 确保不倾斜，如果字体自带斜体效果则不需要 */
+  letter-spacing: 0.05em; /* 稍微增加字间距，提升美感 */
+}
+
+/* 竖排诗词容器 (如果需要，保持原有样式并更新变量) */
+.poem-icontainer {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: var(--font-poem);
+  font-size: 1.7rem; /* 竖排字体可适当大一些 */
+  line-height: 2.2;
+  color: var(--primary-text-color);
+  max-width: 85vw;
+  margin: var(--spacing-large) auto;
+  padding: var(--spacing-medium);
+  background: rgba(255, 255, 255, 0.75); /* 竖排容器背景可稍透明 */
+  border: 1px solid var(--container-border-color);
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 6px 20px var(--container-shadow-color);
+  animation: fadeInText 3s ease forwards;
+  backdrop-filter: blur(6px); /* 竖排容器也可以有模糊效果 */
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* 渐显动画 */
+@keyframes fadeInText {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+/* 背景水墨画统一样式 */
+.poem-bg {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(to top, #0d1b2a, #13263a);
-  z-index: -2;
-}
-
-#rippleCanvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
+  background: no-repeat center center;
+  background-size: cover;
+  /* background-attachment: fixed; /* 移除此行，由JS实现视差滚动 */
+  filter: grayscale(100%) contrast(0.85) brightness(0.95);
+  opacity: 0.22;
   z-index: -1;
+  /* 开启硬件加速，为JS视差滚动做准备 */
+  transform: translate3d(0, 0, 0);
+  /* 添加一个轻微的过渡，让视差滚动更平滑 */
+  transition: transform 0.1s ease-out;
 }
 
-#moon {
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  transition: transform 0.3s ease;
+/* 媒体查询保持不变，加载不同尺寸背景图 */
+/* PC桌面版 */
+@media (min-width: 1025px) {
+  .poem-bg {
+    background-image: url('/img/sushi-desktop.png');
+  }
 }
 
-#moon:hover {
-  transform: translateX(-50%) scale(1.05) rotate(2deg);
+/* 平板版 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .poem-bg {
+    background-image: url('/img/sushi-tablet.png');
+  }
 }
 
-.poem {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  text-align: center;
-  font-size: 1.8rem;
-  line-height: 2.8rem;
-  animation: fadeIn 3s ease forwards;
-}
-
-.poem p {
-  margin: 0;
-  opacity: 0;
-  animation: fadeLine 1s ease forwards;
-}
-
-.poem p:nth-child(1) { animation-delay: 0.5s; }
-.poem p:nth-child(2) { animation-delay: 1.5s; }
-.poem p:nth-child(3) { animation-delay: 2.5s; }
-/* 依此类推… */
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes fadeLine {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* 手机版 */
+@media (max-width: 767px) {
+  .poem-bg {
+    background-image: url('/img/sushi-mobile.png');
+    font-size: var(--poem-font-size-mobile); /* 手机端字体调整 */
+    line-height: var(--poem-line-height-mobile); /* 手机端行高调整 */
+    padding: 1.5em 2em; /* 手机端内边距调整 */
+  }
+  .poem-container {
+    padding: 1.5em 2em; /* 手机端内边距调整 */
+    font-size: var(--poem-font-size-mobile);
+    line-height: var(--poem-line-height-mobile);
+  }
 }
