@@ -85,15 +85,15 @@ body {
 /* 媒体查询保持不变，加载不同尺寸背景图 */
 /* PC桌面版 */
 @media (min-width: 1025px) {
-  .poem-bg { background-image: url('/img/sushi-desktop.png'); }
+  .poem-bg { background-image: url('/img/chunjiang-desktop.png'); }
 }
 /* 平板版 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .poem-bg { background-image: url('/img/sushi-tablet.png'); }
+  .poem-bg { background-image: url('/img/chunjiang-tablet.png'); }
 }
 /* 手机版 */
 @media (max-width: 767px) {
-  .poem-bg { background-image: url('/img/sushi-mobile.png'); }
+  .poem-bg { background-image: url('/img/chunjiang-mobile.png'); }
   .poem-text-container .poem-content { /* 注意：这里是 .poem-text-container .poem-content */
     font-size: var(--poem-font-size-mobile);
     line-height: var(--poem-line-height-mobile);
