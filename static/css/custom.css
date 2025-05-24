@@ -26,6 +26,8 @@ blockquote {
   --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
   --poem-font-size-mobile: 1.1rem; /* 手机端诗词字体大小 */
   --poem-line-height-mobile: 1.6; /* 手机端诗词行高 */
+  --petal-width: 15px;  /* 定义花瓣宽度变量 */
+  --petal-height: 20px; /* 定义花瓣高度变量 */
 }
 
 body {
@@ -81,8 +83,6 @@ body {
   animation: fadeInText 3s ease forwards;
   backdrop-filter: blur(6px); /* 竖排容器也可以有模糊效果 */
   -webkit-backdrop-filter: blur(6px);
-  petal-width: 15px;  /* 定义花瓣宽度变量 */
-  petal-height: 20px; /* 定义花瓣高度变量 */
 }
 
 /* 渐显动画 */
