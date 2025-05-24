@@ -41,7 +41,7 @@ params:
   highlightjsLang: ["latex"]  # 高亮支持的语言
   highlightjsTheme: "github"  # 高亮主题
   highlightjsVersion: "11.7.0"  # 高亮的版本
-  custom_css: ["css/custom.css"] # 这里是相对于 static 文件夹的路径
+ 
 
 markup:
   highlight:
