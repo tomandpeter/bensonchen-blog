@@ -5,8 +5,8 @@
 /* ---------首页自定义样式--------- */
 /* 定义 CSS 变量，便于统一管理和修改主题样式 */
 :root {
-  --primary-text-color: #eee; /* 调整文字颜色为浅色，以便在深色背景上显示 */
-  --secondary-text-color: #ccc; /* 次要文字颜色，用于落款等 */
+  --primary-text-color: #000; /* 调整文字颜色为浅色，以便在深色背景上显示 */
+  --secondary-text-color: #666; /* 次要文字颜色，用于落款等 */
   --container-bg-color: rgba(255, 255, 255, 0.85); /* （此变量现在可能不再直接用于诗词背景） */
   --container-border-color: #ccc; /* （此变量现在可能不再直接用于诗词背景） */
   --container-shadow-color: rgba(0, 0, 0, 0.15); /* （此变量现在可能不再直接用于诗词背景） */
