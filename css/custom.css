@@ -14,6 +14,7 @@
   --spacing-medium: 2em;
   --spacing-large: 3em;
   --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体，首选楷体 */
+  --font-poem-mobile-webfont: 'Ma Shan Zheng'; /* 为手机端指定楷体网络字体 */
   --font-base: 'Inter', sans-serif; /* 基础字体，可用于网站其他部分 */
   --poem-font-size-desktop: 1.25rem; /* 桌面端诗词字体大小 */
   --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
@@ -95,6 +96,7 @@ body {
   .poem-bg { background-image: url('/img/chunjiang-mobile.png'); }
   .poem-text-container .poem-content { /* 注意：这里是 .poem-text-container .poem-content */
     font-size: var(--poem-font-size-mobile);
+    font-family: var(--font-poem-mobile-webfont), "KaiTi", "楷体", serif !important; 
     line-height: var(--poem-line-height-mobile);
   }
   .poem-text-container { /* 手机版容器内边距 */
