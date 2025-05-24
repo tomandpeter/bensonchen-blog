@@ -44,7 +44,7 @@ body {
 
 /* === 新增/修改：应用于 <pre class="poem-content"> 的样式 === */
 .poem-text-container .poem-content {
-  font-family: var(--font-poem); /* 应用诗词字体 */
+  font-family: var(--font-poem) !important; /* <--- 在这里添加 !important */
   font-size: var(--poem-font-size-desktop); /* 应用桌面端字体大小 */
   line-height: var(--poem-line-height-desktop); /* 应用桌面端行高 */
   white-space: pre-wrap; /* 保留空白和换行 */
