@@ -1,5 +1,12 @@
 <link rel="stylesheet" href="/css/custom.css" />
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet"> 
+@font-face {
+  font-family: 'LXGW WenKai GB'; /* 这个是你将在 CSS 中引用的字体名称 */
+  src: url('/fonts/LXGWWenKai-Regular.woff2') format('woff2'), /* 确保路径正确 */
+       url('/fonts/LXGWWenKai-Regular.ttf') format('truetype'); /* 确保路径正确 */
+  font-weight: normal; /* 或根据字体提供的字重设置，通常默认是 normal (400) */
+  font-style: normal;
+  font-display: swap; /* 推荐：优化字体加载体验，避免文字闪烁 */
+}
 
 {{ partial "header.html" . }}
 
