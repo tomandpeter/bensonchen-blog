@@ -188,8 +188,8 @@ body {
 .article-image.float-right {
   float: right;
   margin: 0 0 1em 1em;
-  max-width: 30%;  /* 默认电脑上 30% */
   min-width: 40px;
+  max-width: 150px;
 }
 
 /* 左浮动 */
@@ -220,11 +220,10 @@ body {
 
 /* 手机版自适应 */
 @media (max-width: 768px) {
-  .article-image.float-right,
-  .article-image.float-left {
+  .article-image {
     float: none;
-    max-width: 80%; /* 手机上图片宽度缩小到80% */
     margin: 1em auto;
     display: block;
+    max-width: 80%;
   }
 }
