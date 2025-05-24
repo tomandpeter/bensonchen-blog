@@ -1,6 +1,5 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
-{{- $caption := .Get "caption" -}}
 {{- $align := .Get "align" | default "" -}} {{/* 用于控制浮动和居中 */}}
 {{- $width := .Get "width" | default "250px" -}} {{/* 默认宽度 */}}
 
@@ -12,13 +11,7 @@
          display: block; 
          margin: {{ if eq $align "float-right" }}0 0 1em 1em{{ else if eq $align "float-left" }}0 1em 1em 0{{ else }}0 auto{{ end }}; 
          float: {{ if eq $align "float-right" }}right;{{ else if eq $align "float-left" }}left;{{ else }}none;{{ end }}
-         width: {{ $width }}; /* 直接控制图片宽度 */
-         min-width: 40px; /* 最小宽度，防止过小 */
+         width: {{ $width }};
+         min-width: 40px;
        ">
-  
-  {{- with $caption -}}
-  <figcaption>
-    {{ . }}
-  </figcaption>
-  {{- end -}}
 </figure>
