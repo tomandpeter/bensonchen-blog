@@ -1,17 +1,8 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
-{{- $align := .Get "align" | default "" -}} {{/* 用于控制浮动和居中 */}}
-{{- $width := .Get "width" | default "250px" -}} {{/* 默认宽度 */}}
+{{- $align := .Get "align" | default "float-right" -}}
 
-<figure class="article-image {{ if ne $align "" }}{{ $align }}{{ end }}">
-  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" 
-       style="
-         max-width: 100%; 
-         height: auto; 
-         display: block; 
-         margin: {{ if eq $align "float-right" }}0 0 1em 1em{{ else if eq $align "float-left" }}0 1em 1em 0{{ else }}0 auto{{ end }}; 
-         float: {{ if eq $align "float-right" }}right;{{ else if eq $align "float-left" }}left;{{ else }}none;{{ end }}
-         width: {{ $width }};
-         min-width: 40px;
-       ">
+<figure class="article-image {{ $align }}">
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy">
 </figure>
+
