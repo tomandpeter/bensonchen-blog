@@ -1,0 +1,15 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- $align := .Get "align" | default "center" -}} {# 默认居中 #}
+{{- $width := .Get "width" -}} {# Shortcode 允许设置一个最大宽度 #}
+
+<figure class="article-image {{ $align }}" {{ with $width }}style="max-width: {{ . }}px;"{{ end }}>
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy">
+  
+  {{- with $caption -}}
+  <figcaption>
+    {{ . }}
+  </figcaption>
+  {{- end -}}
+</figure>
