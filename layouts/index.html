@@ -32,19 +32,4 @@
 
 {{ partial "footer.html" . }}
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const poemBg = document.querySelector('.poem-bg');
-    // 确保元素存在
-    if (poemBg) {
-      // 监听窗口滚动事件
-      window.addEventListener('scroll', function() {
-        const scrollPosition = window.pageYOffset;
-        // 视差滚动速度，值越小背景移动越慢，视差效果越明显
-        const parallaxSpeed = 0.3;
-        // 使用 translate3d 开启硬件加速，使滚动更流畅
-        poemBg.style.transform = `translate3d(0, ${-scrollPosition * parallaxSpeed}px, 0)`;
-      });
-    }
-  });
-</script>
+
