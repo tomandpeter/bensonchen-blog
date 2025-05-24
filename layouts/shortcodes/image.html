@@ -1,8 +1,8 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" -}}
-{{- $align := .Get "align" | default "" -}} {# 用于控制浮动和居中 #}
-{{- $width := .Get "width" | default "250px" -}} {# 默认宽度 #}
+{{- $align := .Get "align" | default "" -}} {{/* 用于控制浮动和居中 */}}
+{{- $width := .Get "width" | default "250px" -}} {{/* 默认宽度 */}}
 
 <figure class="article-image {{ if ne $align "" }}{{ $align }}{{ end }}">
   <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" 
