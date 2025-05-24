@@ -3,71 +3,83 @@
 }
 
 @font-face {
-  font-family: 'LXGW WenKai GB'; /* 这个是你将在CSS中引用的字体名称 */
-  src: url('/fonts/LXGWWenKai-Regular.woff2') format('woff2'),
-       url('/fonts/LXGWWenKai-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-family: 'LXGW WenKai GB'; /* 这个是你在CSS中引用的字体名称 */
+  src: url('/fonts/LXGWWenKai-Regular.woff2') format('woff2'), /* 霞鹜文楷 woff2 格式 */
+       url('/fonts/LXGWWenKai-Regular.ttf') format('truetype'); /* 霞鹜文楷 ttf 格式作为回退 */
+  font-weight: normal; /* Regular 字重通常是 normal (400) */
   font-style: normal;
-  font-display: swap;
+  font-display: swap; /* 优化字体加载体验，避免文字闪烁 */
 }
 
 
-/* ---------首页自定义样式--------- */
+/* --------- 全局及首页自定义样式 --------- */
+
 /* 定义 CSS 变量，便于统一管理和修改主题样式 */
 :root {
-  --primary-text-color: #000; /* 调整文字颜色为浅色，以便在深色背景上显示 */
-  --secondary-text-color: #666; /* 次要文字颜色，用于落款等 */
-  --container-bg-color: rgba(255, 255, 255, 0.85); /* （此变量现在可能不再直接用于诗词背景） */
-  --container-border-color: #ccc; /* （此变量现在可能不再直接用于诗词背景） */
-  --container-shadow-color: rgba(0, 0, 0, 0.15); /* （此变量现在可能不再直接用于诗词背景） */
+  --primary-text-color: #000; /* 主文本颜色：黑色 */
+  --secondary-text-color: #666; /* 次要文本颜色：中等深灰，用于落款等 */
+
+  /* 以下变量可能不再直接使用，但保留作为参考 */
+  --container-bg-color: rgba(255, 255, 255, 0.85); 
+  --container-border-color: #ccc; 
+  --container-shadow-color: rgba(0, 0, 0, 0.15); 
   --border-radius-large: 12px;
   --spacing-medium: 2em;
   --spacing-large: 3em;
-  --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体，首选楷体 */
-  --font-poem-mobile-webfont: 'LXGW WenKai GB'; /* 为手机端指定楷体网络字体 */
-  --font-base: 'Inter', sans-serif; /* 基础字体，可用于网站其他部分 */
-  --poem-font-size-desktop: 1.25rem; /* 桌面端诗词字体大小 */
-  --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
-  --poem-font-size-mobile: 1.1rem; /* 手机端诗词字体大小 */
-  --poem-line-height-mobile: 1.6; /* 手机端行高 */
+
+  /* === 核心：定义全局基础字体栈 === */
+  --font-base: Optima, 'Lucida Sans', Calibri, Candara, Arial, 'source-han-serif-sc', 'Source Han Serif SC', 'Source Han Serif CN', 'Source Han Serif TC', 'Source Han Serif TW', 'Source Han Serif', 'Noto Serif CJK SC', 'Songti SC', 'Microsoft YaHei', sans-serif;
+
+  /* === 定义桌面端诗歌的回退楷体字体栈 === */
+  --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; 
+
+  /* === 定义手机端诗歌使用的霞鹜文楷网络字体名称 === */
+  --font-poem-mobile-webfont: 'LXGW WenKai GB'; 
+
+  /* 诗歌字体大小和行高变量 */
+  --poem-font-size-desktop: 1.25rem; 
+  --poem-line-height-desktop: 1.7; 
+  --poem-font-size-mobile: 1.1rem; 
+  --poem-line-height-mobile: 1.6; 
 }
 
+/* === 全局 body 样式 === */
 body {
-  font-family: var(--font-base); /* 应用基础字体 */
-  color: var(--primary-text-color); /* 设置 body 的默认文字颜色 */
+  font-family: var(--font-base); /* 应用基础字体到整个网站 */
+  color: var(--primary-text-color); /* 应用主文本颜色 */
 }
 
-/* === 修改：诗词文本容器样式，移除卡片效果 === */
-/* 诗词文本容器样式 */
+/* === 诗词文本容器样式 (移除卡片效果，专注于文本展示) === */
 .poem-text-container {
-  max-width: 700px;
-  margin: 5vh auto; /* 调整上下外边距，使其在页面中部 */
+  max-width: 700px; /* 限制诗歌文本宽度 */
+  margin: 5vh auto; /* 垂直居中，水平居中 */
   padding: var(--spacing-medium) var(--spacing-large); /* 内部边距 */
-  color: var(--primary-text-color); /* 诗词文本颜色 */
+  color: var(--primary-text-color); /* 诗词文本颜色继承自 body，这里再次明确 */
   position: relative; /* 确保创建堆叠上下文 */
-  z-index: 1; /* 确保诗词文本在最上层，位于背景图和效果层之上 */
-  animation: fadeInText 3s ease forwards;
+  z-index: 1; /* 确保诗词文本在最上层，位于背景图之下 */
+  animation: fadeInText 3s ease forwards; /* 渐显动画 */
   text-align: center; /* 居中显示诗歌文本 */
   /* white-space: pre-wrap; 从这里移除，移到 .poem-content */
 }
 
-/* === 新增/修改：应用于 <pre class="poem-content"> 的样式 === */
+/* === 应用于 <pre class="poem-content"> 的样式 === */
 .poem-text-container .poem-content {
-  font-family: var(--font-poem) !important; /* <--- 在这里添加 !important */
-  font-size: var(--poem-font-size-desktop); /* 应用桌面端字体大小 */
-  line-height: var(--poem-line-height-desktop); /* 应用桌面端行高 */
+  /* 桌面端诗歌字体：优先使用系统楷体，因为 body 已设为全局字体 */
+  font-family: var(--font-poem) !important; 
+  font-size: var(--poem-font-size-desktop); 
+  line-height: var(--poem-line-height-desktop); 
   white-space: pre-wrap; /* 保留空白和换行 */
-  /* 可以移除 <pre> 默认的 margin-top/bottom 如果你发现有多余的空白 */
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0; /* 移除 <pre> 默认的 margin-top */
+  margin-bottom: 0; /* 移除 <pre> 默认的 margin-bottom */
 }
-/* 诗词落款样式 (选择器更新为 .poem-text-container .author-signature) */
+
+/* 诗词落款样式 (选择器已更新为 .poem-text-container .author-signature) */
 .poem-text-container .author-signature {
   display: block;
   text-align: right;
   margin-top: 1.5em;
   font-size: 0.9em;
-  color: var(--secondary-text-color);
+  color: var(--secondary-text-color); /* 落款颜色 */
   font-style: normal;
   letter-spacing: 0.05em;
 }
@@ -78,34 +90,42 @@ body {
   100% { opacity: 1; transform: translateY(0);}
 }
 
-/* 背景水墨画统一样式 */
+/* === 背景图片统一样式 === */
 .poem-bg {
-  position: fixed;
+  position: fixed; /* 固定在视口 */
   top: 0; left: 0; right: 0; bottom: 0;
-  background: no-repeat center center;
-  background-size: cover;
-  background-image: url('/img/chunjiang-desktop.png'); /* 背景图片 */
-  filter: grayscale(100%) contrast(0.85) brightness(0.95);
-  opacity: 0.5;
-  z-index: -2; /* 放在最底层 */
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.1s ease-out;
+  background: no-repeat center center; /* 背景图片不重复，居中 */
+  background-size: cover; /* 覆盖整个元素，可能裁剪 */
+  background-image: url('/img/chunjiang-desktop.png'); /* 默认背景图片（桌面版） */
+  filter: grayscale(100%) contrast(0.85) brightness(0.95); /* 灰度滤镜效果 */
+  opacity: 0.5; /* 背景不透明度，可根据背景图的明暗和文字颜色调整 */
+  z-index: -2; /* 放在所有内容的底层 */
+  transform: translate3d(0, 0, 0); /* 开启硬件加速 */
+  transition: transform 0.1s ease-out; /* 平滑过渡 */
 }
 
-/* 媒体查询保持不变，加载不同尺寸背景图 */
+/* 媒体查询：根据屏幕尺寸加载不同背景图和调整文本样式 */
+
 /* PC桌面版 */
 @media (min-width: 1025px) {
-  .poem-bg { background-image: url('/img/chunjiang-desktop.png'); }
+  .poem-bg { 
+    background-image: url('/img/chunjiang-desktop.png'); /* 桌面图片 */
+  }
 }
 /* 平板版 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .poem-bg { background-image: url('/img/chunjiang-tablet.png'); }
+  .poem-bg { 
+    background-image: url('/img/chunjiang-tablet.png'); /* 平板图片 */
+  }
 }
 /* 手机版 */
 @media (max-width: 767px) {
-  .poem-bg { background-image: url('/img/chunjiang-mobile.png'); }
-  .poem-text-container .poem-content { /* 注意：这里是 .poem-text-container .poem-content */
-    font-size: var(--poem-font-size-mobile);
+  .poem-bg { 
+    background-image: url('/img/chunjiang-mobile.png'); /* 手机图片 */
+  }
+  .poem-text-container .poem-content { 
+    font-size: var(--poem-font-size-mobile); /* 手机端诗歌字体大小 */
+    /* 手机端诗歌字体：优先使用霞鹜文楷，回退到系统楷体 */
     font-family: var(--font-poem-mobile-webfont), "KaiTi", "楷体", serif !important; 
     line-height: var(--poem-line-height-mobile);
   }
@@ -114,14 +134,24 @@ body {
   }
 }
 
-/* === 针对 .masthead .tagline 类，单纯取消斜体 === */
+/* === 针对 .masthead .tagline 类，取消斜体 === */
 .masthead .tagline { 
   font-style: normal; /* 关键：取消斜体，让文字直立 */
 }
-
 /* 手机端适配：同样确保手机上也是直立的 */
 @media (max-width: 767px) {
   .masthead .tagline { 
     font-style: normal; 
   }
 }
+
+/*
+ * 注意：
+ * - 确保你的图片文件 (chunjiang-desktop.png, chunjiang-tablet.png, chunjiang-mobile.png)
+ * 位于 static/img/ 目录下，并且文件名正确。
+ * - 确保字体文件 (LXGWWenKai-Regular.woff2, LXGWWenKai-Regular.ttf)
+ * 位于 static/fonts/ 目录下，并且文件名正确。
+ * - 每次修改 CSS 后，务必重建 Hugo 网站，并强制刷新浏览器缓存。
+ */
+
+/* --------- custom.css END --------- */
