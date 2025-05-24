@@ -191,15 +191,15 @@ body {
   max-width: 100%; /* 图片宽度不超过其父容器 */
   height: auto; /* 保持图片比例 */
   margin: 0 auto; /* 居中显示 */
+  /* === 新增：对文章中的所有图片应用灰度滤镜 === */
+  filter: grayscale(100%); /* 将图片完全转换为灰度 */
+  transition: filter 0.3s ease-in-out; /* 过渡效果：鼠标悬停时逐渐恢复彩色 */
 }
 
-.article-image figcaption {
-  font-size: 0.9em;
-  color: var(--secondary-text-color); /* 使用次要文本颜色 */
-  margin-top: 0.5em;
-  text-align: center;
+/* 可选：鼠标悬停时恢复彩色 */
+.article-image img:hover {
+  filter: grayscale(0%); /* 恢复彩色 */
 }
-
 
 /* === 图片漂浮在右上角的样式 === */
 /* 这个类名要和 Shortcode 中使用的 align 参数值一致：align="float-right-top" */
@@ -226,13 +226,12 @@ body {
 /* 为了防止文字被图片遮挡，你需要为文章内容区域添加一个右侧内边距 */
 /* 这将取决于你的文章内容是如何布局的，请根据你实际的 HTML 结构调整选择器 */
 /* 比如，你的文章内容可能在 .main, .post-content, .article-body 等容器内 */
-/* 这里假设你的文章正文内容在 .main 内部的 p 或 div 中 */
 article.main { /* 确保你的文章主容器是相对定位 */
   position: relative; /* 如果没有这行，请添加 */
 }
 .main p, .main div { /* 或者 .post-content p, .article-body div 等更具体的选择器 */
-    padding-right: 260px; /* 略大于图片宽度，留出空间 */
-    box-sizing: border-box; /* 确保 padding 不会增加总宽度 */
+    padding-right: calc(250px + 2em); /* 图片宽度(250px) + 边距(2em) */
+    box-sizing: border-box; 
 }
 
 
@@ -253,8 +252,8 @@ article.main { /* 确保你的文章主容器是相对定位 */
 @media (max-width: 767px) {
   .float-right-top {
     position: static; /* 手机上取消绝对定位，回归正常流 */
-    width: 90%; /* 占据大部分宽度 */
-    margin: 1em auto; /* 居中显示，上下留白 */
+    width: 90% !important; /* 占据大部分宽度 */
+    margin: 1em auto !important; /* 居中显示，上下留白 */
     float: none; /* 取消浮动 */
     clear: both; /* 清除浮动影响 */
     padding-right: 0; /* 移除右侧内边距 */
@@ -263,12 +262,6 @@ article.main { /* 确保你的文章主容器是相对定位 */
       padding-right: 0; /* 手机上文章内容不再需要右侧内边距 */
   }
 }
-
-
-
-
-
-
 
 
 
