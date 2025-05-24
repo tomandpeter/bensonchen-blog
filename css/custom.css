@@ -178,49 +178,53 @@ body {
 
 /* --------- 正文图片浮动于右侧 --------- */
 
-/* 图片浮动样式 */
+/* 图片浮动容器 */
 .article-image {
   margin: 1em 0;
   overflow: auto;
 }
 
+/* 右浮动 */
 .article-image.float-right {
   float: right;
   margin: 0 0 1em 1em;
-  max-width: 15%;
+  max-width: 30%;  /* 默认电脑上 30% */
   min-width: 40px;
 }
 
+/* 左浮动 */
 .article-image.float-left {
   float: left;
   margin: 0 1em 1em 0;
-  max-width: 15%;
+  max-width: 30%;
   min-width: 40px;
 }
 
-/* 图片内图片统一样式 */
+/* 图片基础样式 */
 .article-image img {
   max-width: 100%;
   height: auto;
   display: block;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* 默认灰度处理 */
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
 }
 
-/* 图片说明文字 */
-.article-image figcaption {
-  font-size: 0.85rem;
-  color: #777;
-  text-align: center;
-  margin-top: 0.5em;
+/* 鼠标悬停恢复彩色 */
+.article-image img:hover {
+  filter: grayscale(0%);
 }
 
-
-
-
-
-
-
-
-
-
+/* 手机版自适应 */
+@media (max-width: 768px) {
+  .article-image.float-right,
+  .article-image.float-left {
+    float: none;
+    max-width: 80%; /* 手机上图片宽度缩小到80% */
+    margin: 1em auto;
+    display: block;
+  }
+}
