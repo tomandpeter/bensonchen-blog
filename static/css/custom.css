@@ -123,6 +123,13 @@ body {
   .poem-bg { 
     background-image: url('/img/chunjiang-mobile.png'); /* 手机图片 */
   }
+    /* === 关键：让手机端 body 优先使用霞鹜文楷 === */
+  body { /* 注意：这里是 body 元素，而非 poem-text-container */
+    font-family: var(--font-poem-mobile-webfont), Optima, 'Lucida Sans', Calibri, Candara, Arial, sans-serif !important; 
+    /* !important 确保它覆盖桌面 body 的设置 */
+    /* 回退字体链需要重新考虑，确保中英文都有可靠的回退 */
+  }
+  
   .poem-text-container .poem-content { 
     font-size: var(--poem-font-size-mobile); /* 手机端诗歌字体大小 */
     /* 手机端诗歌字体：优先使用霞鹜文楷，回退到系统楷体 */
