@@ -2,58 +2,50 @@
   padding: 1em;
 }
 
-blockquote {
-    margin: 1em 0;
-    padding: 0 2em;
-    border-left: 3px solid #ddd;
-    font-family: KaiTi, '楷体', '楷体_GB2312', serif; /* 设置楷体字体 */
-}
-
 /* ---------首页自定义样式--------- */
 /* 定义 CSS 变量，便于统一管理和修改主题样式 */
 :root {
-  --primary-text-color: #222; /* 主要文字颜色 */
-  --secondary-text-color: #666; /* 次要文字颜色，用于落款等 */
-  --container-bg-color: rgba(255, 255, 255, 0.85); /* 诗词容器背景色 */
-  --container-border-color: #ccc; /* 诗词容器边框颜色 */
-  --container-shadow-color: rgba(0, 0, 0, 0.15); /* 诗词容器阴影颜色 */
-  --border-radius-large: 12px; /* 大圆角 */
-  --spacing-medium: 2em; /* 中等内边距 */
-  --spacing-large: 3em; /* 大外边距 */
+  --primary-text-color: #eee; /* 调整文字颜色为浅色，以便在深色背景上显示 */
+  --secondary-text-color: #ccc; /* 次要文字颜色，用于落款等 */
+  --container-bg-color: rgba(255, 255, 255, 0.85); /* （此变量现在可能不再直接用于诗词背景） */
+  --container-border-color: #ccc; /* （此变量现在可能不再直接用于诗词背景） */
+  --container-shadow-color: rgba(0, 0, 0, 0.15); /* （此变量现在可能不再直接用于诗词背景） */
+  --border-radius-large: 12px;
+  --spacing-medium: 2em;
+  --spacing-large: 3em;
   --font-poem: "KaiTi", "楷体", "STKaiti", "KaiTi_GB2312", serif; /* 诗词主字体，首选楷体 */
   --font-base: 'Inter', sans-serif; /* 基础字体，可用于网站其他部分 */
   --poem-font-size-desktop: 1.25rem; /* 桌面端诗词字体大小 */
   --poem-line-height-desktop: 1.7; /* 桌面端诗词行高 */
   --poem-font-size-mobile: 1.1rem; /* 手机端诗词字体大小 */
-  --poem-line-height-mobile: 1.6; /* 手机端诗词行高 */
+  --poem-line-height-mobile: 1.6; /* 手机端行高 */
+  --petal-width: 15px; /* 定义花瓣宽度变量 */
+  --petal-height: 20px; /* 定义花瓣高度变量 */
 }
 
 body {
   font-family: var(--font-base); /* 应用基础字体 */
+  color: var(--primary-text-color); /* 设置 body 的默认文字颜色 */
 }
 
-/* 诗词容器样式 */
-.poem-container {
+/* === 修改：诗词文本容器样式，移除卡片效果 === */
+.poem-text-container {
   max-width: 700px;
-  margin: var(--spacing-large) auto;
-  padding: var(--spacing-medium) var(--spacing-large);
-  background: var(--container-bg-color);
-  border: 1.5px solid var(--container-border-color);
-  border-radius: var(--border-radius-large);
-  box-shadow: 0 6px 15px var(--container-shadow-color);
+  margin: 5vh auto; /* 调整上下外边距，使其在页面中部 */
+  padding: var(--spacing-medium) var(--spacing-large); /* 内部边距 */
   font-family: var(--font-poem); /* 应用诗词字体 */
   font-size: var(--poem-font-size-desktop);
   line-height: var(--poem-line-height-desktop);
-  color: var(--primary-text-color);
-  position: relative;
+  color: var(--primary-text-color); /* 诗词文本颜色，与 body 颜色保持一致 */
+  position: relative; /* 确保创建堆叠上下文 */
+  z-index: 1; /* 确保诗词文本在最上层，位于背景图和效果层之上 */
   animation: fadeInText 3s ease forwards;
-  /* 添加背景模糊效果，提升技术感和美感 */
-  backdrop-filter: blur(8px); /* 模糊度可调整 */
-  -webkit-backdrop-filter: blur(8px); /* 兼容 Safari */
+  text-align: center; /* 居中显示诗歌文本 */
+  white-space: pre-wrap; /* 保留 <pre> 标签中的空白和换行 */
 }
 
 /* 诗词落款样式 */
-.poem-container .author-signature {
+.poem-text-container .author-signature { /* 注意：选择器已更新为 .poem-text-container */
   display: block; /* 让落款单独占一行 */
   text-align: right; /* 右对齐 */
   margin-top: 1.5em; /* 与诗词内容保持距离 */
@@ -63,24 +55,9 @@ body {
   letter-spacing: 0.05em; /* 稍微增加字间距，提升美感 */
 }
 
-/* 竖排诗词容器 (如果需要，保持原有样式并更新变量) */
+/* 竖排诗词容器 (如果不再使用，可以删除此段，避免冗余) */
 .poem-icontainer {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  font-family: var(--font-poem);
-  font-size: 1.7rem; /* 竖排字体可适当大一些 */
-  line-height: 2.2;
-  color: var(--primary-text-color);
-  max-width: 85vw;
-  margin: var(--spacing-large) auto;
-  padding: var(--spacing-medium);
-  background: rgba(255, 255, 255, 0.75); /* 竖排容器背景可稍透明 */
-  border: 1px solid var(--container-border-color);
-  border-radius: var(--border-radius-large);
-  box-shadow: 0 6px 20px var(--container-shadow-color);
-  animation: fadeInText 3s ease forwards;
-  backdrop-filter: blur(6px); /* 竖排容器也可以有模糊效果 */
-  -webkit-backdrop-filter: blur(6px);
+  /* ... (原有竖排样式，如果不再使用可以删除) ... */
 }
 
 /* 渐显动画 */
@@ -95,64 +72,53 @@ body {
   top: 0; left: 0; right: 0; bottom: 0;
   background: no-repeat center center;
   background-size: cover;
-  /* background-attachment: fixed; /* 移除此行，由JS实现视差滚动 */
   filter: grayscale(100%) contrast(0.85) brightness(0.95);
   opacity: 0.22;
-  z-index: -1;
-  /* 开启硬件加速，为JS视差滚动做准备 */
+  z-index: -2; /* 放在最底层 */
   transform: translate3d(0, 0, 0);
-  /* 添加一个轻微的过渡，让视差滚动更平滑 */
   transition: transform 0.1s ease-out;
 }
 
 /* 媒体查询保持不变，加载不同尺寸背景图 */
 /* PC桌面版 */
 @media (min-width: 1025px) {
-  .poem-bg {
-    background-image: url('/img/sushi-desktop.png');
-  }
+  .poem-bg { background-image: url('/img/sushi-desktop.png'); }
 }
-
 /* 平板版 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .poem-bg {
-    background-image: url('/img/sushi-tablet.png');
-  }
+  .poem-bg { background-image: url('/img/sushi-tablet.png'); }
 }
-
 /* 手机版 */
 @media (max-width: 767px) {
-  .poem-bg {
-    background-image: url('/img/sushi-mobile.png');
-    font-size: var(--poem-font-size-mobile); /* 手机端字体调整 */
-    line-height: var(--poem-line-height-mobile); /* 手机端行高调整 */
-    padding: 1.5em 2em; /* 手机端内边距调整 */
-  }
-  .poem-container {
-    padding: 1.5em 2em; /* 手机端内边距调整 */
+  .poem-bg { background-image: url('/img/sushi-mobile.png'); }
+  .poem-text-container {
     font-size: var(--poem-font-size-mobile);
     line-height: var(--poem-line-height-mobile);
+    padding: 1.5em 2em;
   }
 }
 
-
 /* --- 月光江波效果的样式 --- */
-#moonRiverContainer {
+.effect-layer { /* 保持这个基础样式 */
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* 允许点击穿透 */
-  z-index: 0; /* 在背景图之上，在诗词容器之下 */
+  pointer-events: none;
 }
 
-div#moon {
+#moonRiverContainer {
+  /* 确保 z-index 在背景图之上，在诗词文本之下 */
+  z-index: -1; 
+}
+
+div#moon { /* 提高优先级，确保样式生效 */
   position: absolute;
   top: 10vh; /* 初始位置：页面顶部 10% 的高度 */
   left: 50vw; /* 初始位置：水平居中 */
-  width: 80px; /* 确保宽度为 80px */
-  height: 80px; /* 确保高度为 80px */
+  width: 80px; /* 确保宽度 */
+  height: 80px; /* 确保高度 */
   border-radius: 50%; /* 圆形 */
   background-color: rgba(255, 255, 220, 0.8); /* 柔和的月光颜色 */
   box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); /* 初始光晕 */
@@ -161,28 +127,22 @@ div#moon {
 
 /* 关键：月光光晕动画 */
 @keyframes moonGlow {
-  0% {
-    box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 60px 30px rgba(255, 255, 220, 0.4); /* 光晕扩散，变淡 */
-  }
-  100% {
-    box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6);
-  }
+  0% { box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); }
+  50% { box-shadow: 0 0 60px 30px rgba(255, 255, 220, 0.4); } /* 光晕扩散，变淡 */
+  100% { box-shadow: 0 0 40px 20px rgba(255, 255, 220, 0.6); }
 }
-
-/* 同样，为动画应用选择器时也保持优先级一致 */
-div#moon {
-  animation: moonGlow 5s infinite alternate; /* 应用光晕动画 */
+div#moon { /* 动画应用到 #moon 元素 */
+  animation: moonGlow 5s infinite alternate; 
 }
 
 
-
-
-
-
-
-
-
-
+/* === 关键：riverCanvas 的新样式和定位 === */
+#riverCanvas {
+  position: absolute; /* 相对于其父容器 moonRiverContainer 定位 */
+  top: 40vh; /* 从视口高度的 40% 处开始 */
+  left: 0;
+  width: 100vw; /* 占据整个视口宽度 */
+  height: 60vh; /* 占据视口底部 60% 的高度作为江面 */
+  /* background-color: rgba(0, 0, 0, 0.6) !important; /* 临时背景色，调试用，调试完成后请删除或注释 */
+  z-index: 0; /* 确保 Canvas 在 moonRiverContainer 内部的正确层级，高于 moon */
+}
