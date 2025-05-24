@@ -76,7 +76,7 @@ body {
   background: no-repeat center center;
   background-size: cover;
   filter: grayscale(100%) contrast(0.85) brightness(0.95);
-  opacity: 0.22;
+  opacity: 0.5;
   z-index: -2; /* 放在最底层 */
   transform: translate3d(0, 0, 0);
   transition: transform 0.1s ease-out;
