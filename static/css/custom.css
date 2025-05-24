@@ -115,35 +115,27 @@ body {
 }
 
 /* === 针对 .tagline 类，移除斜体并调整样式 === */
-.tagline {
+.masthead .tagline { 
   font-style: normal; /* 确保取消斜体 */
-  font-weight: normal; /* 保持常规字重，不加粗，增加内敛感 */
-  max-width: 600px; /* 限制宽度，防止过长而散漫 */
-  margin: 2em auto; /* 调整上下间距，让它在页面中“浮”起来 */
-  padding: 0.5em 1em; /* 内部留白，增加呼吸感 */
-  /* color: var(--primary-text-color); */ /* 继续使用主文本颜色，但可能需要调整其透明度 */
-  color: rgba(255, 255, 255, 0.8); /* 尝试使用半透明的白色，在深色背景下更有朦胧美 */
-  font-size: 1.25em; /* 略微增大字号，使其显眼又不失优雅 */
-  line-height: 1.6; /* 调整行高，让文字不拥挤 */
-  text-align: center; /* 居中对齐 */
-  letter-spacing: 0.05em; /* 增加一点字间距，提升美感 */
-  /* text-shadow: 0 0 5px rgba(0, 0, 0, 0.6); */ /* 增加柔和阴影，在复杂背景上更突出 */
-  
-  /* 增加一个非常轻微的边框，模拟画卷的边缘或印章的方框感 */
-  border: 1px solid rgba(255, 255, 255, 0.3); 
-  /* 背景可以完全透明，或极浅的模糊 */
-  background: transparent; 
-  backdrop-filter: blur(2px); /* 轻微背景模糊，让它在背景上更突出，但需注意兼容性 */
-  -webkit-backdrop-filter: blur(2px);
-  border-radius: 4px; /* 略微圆角 */
+  font-weight: 500; */ /* 根据你的喜好设置 */
+  color: #555; */ /* 根据你的喜好设置 */
+  max-width: 600px; 
+  margin: 2em auto; 
+  padding: 0.5em 1em; 
+  color: rgba(255, 255, 255, 0.8); 
+  font-size: 1.25em; 
+  line-height: 1.6; 
+  text-align: center; 
+  letter-spacing: 0.05em; 
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.6); 
 }
 
-/* 手机端适配 */
+/* 手机端适配：同样修改选择器以保持优先级一致 */
 @media (max-width: 767px) {
-  .tagline {
-    font-size: 1.1em; /* 手机上字号可稍微小一点 */
+  .masthead .tagline { /* 确保这里也是 .masthead .tagline */
+    font-style: normal; 
+    font-size: 1.1em; 
     margin: 1.5em auto;
     padding: 0.4em 0.8em;
-    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
