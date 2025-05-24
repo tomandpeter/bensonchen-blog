@@ -75,6 +75,7 @@ body {
   top: 0; left: 0; right: 0; bottom: 0;
   background: no-repeat center center;
   background-size: cover;
+  background-image: url('/img/chunjiang-desktop.png'); /* 背景图片 */
   filter: grayscale(100%) contrast(0.85) brightness(0.95);
   opacity: 0.5;
   z-index: -2; /* 放在最底层 */
