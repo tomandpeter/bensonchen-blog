@@ -111,6 +111,17 @@ body {
   .poem-bg { 
     background-image: url('/img/chunjiang-desktop.png'); /* 桌面图片 */
   }
+  /* === 新增：桌面版 blockquote 样式 === */
+  blockquote {
+    border-left: none; /* 1. 去掉左侧的 3px 线条 */
+    font-family: var(--font-poem) !important; /* 2. 字体改成楷体字，使用 !important 确保覆盖全局字体 */
+    color: var(--secondary-text-color); /* 3. 字体颜色稍淡 */
+    /*
+     * 保持 blockquote 原有的 margin, padding 等，除非你想修改
+     * margin: 1em 0;
+     * padding: 0 2em;
+     */
+  }
 }
 /* 平板版 */
 @media (min-width: 768px) and (max-width: 1024px) {
