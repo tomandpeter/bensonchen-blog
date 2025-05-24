@@ -1,11 +1,20 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" -}}
-{{- $align := .Get "align" | default "" -}} {# align可以为空或'float-right' #}
-{{- $width := .Get "width" | default "250px" -}} {# 默认宽度，也可以设为15%等 #}
+{{- $align := .Get "align" | default "" -}} {# 用于控制浮动和居中 #}
+{{- $width := .Get "width" | default "250px" -}} {# 默认宽度 #}
 
-<figure class="article-image {{ $align }}" style="width: {{ $width }}; float: {{ if eq $align "float-right" }}right{{ else }}none{{ end }};">
-  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" style="max-width: 100%; height: auto;">
+<figure class="article-image {{ if ne $align "" }}{{ $align }}{{ end }}">
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" 
+       style="
+         max-width: 100%; 
+         height: auto; 
+         display: block; 
+         margin: {{ if eq $align "float-right" }}0 0 1em 1em{{ else if eq $align "float-left" }}0 1em 1em 0{{ else }}0 auto{{ end }}; 
+         float: {{ if eq $align "float-right" }}right;{{ else if eq $align "float-left" }}left;{{ else }}none;{{ end }}
+         width: {{ $width }}; /* 直接控制图片宽度 */
+         min-width: 40px; /* 最小宽度，防止过小 */
+       ">
   
   {{- with $caption -}}
   <figcaption>
