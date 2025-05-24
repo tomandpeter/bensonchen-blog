@@ -114,14 +114,4 @@ body {
   }
 }
 
-/* === 针对 .tagline 类，移除斜体并调整样式 === */
-.masthead .tagline { 
-  font-style: normal; /* 确保取消斜体 */
-}
 
-/* 手机端适配：同样修改选择器以保持优先级一致 */
-@media (max-width: 767px) {
-  .masthead .tagline { /* 确保这里也是 .masthead .tagline */
-    font-style: normal; 
-  }
-}
