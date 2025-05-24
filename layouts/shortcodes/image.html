@@ -1,11 +1,11 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $caption := .Get "caption" -}}
-{{- $align := .Get "align" | default "center" -}} {# 默认居中 #}
-{{- $width := .Get "width" -}} {# Shortcode 允许设置一个最大宽度 #}
+{{- $align := .Get "align" | default "" -}} {# align可以为空或'float-right' #}
+{{- $width := .Get "width" | default "250px" -}} {# 默认宽度，也可以设为15%等 #}
 
-<figure class="article-image {{ $align }}" {{ with $width }}style="max-width: {{ . }}px;"{{ end }}>
-  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy">
+<figure class="article-image {{ $align }}" style="width: {{ $width }}; float: {{ if eq $align "float-right" }}right{{ else }}none{{ end }};">
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" style="max-width: 100%; height: auto;">
   
   {{- with $caption -}}
   <figcaption>
