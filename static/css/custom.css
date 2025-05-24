@@ -134,3 +134,65 @@ body {
     line-height: var(--poem-line-height-mobile);
   }
 }
+
+
+/* === 新增：效果层的基础样式 === */
+.effect-layer {
+  position: fixed; /* 固定在视口 */
+  top: 0;
+  left: 0;
+  width: 100vw; /* 占据整个视口宽度 */
+  height: 100vh; /* 占据整个视口高度 */
+  pointer-events: none; /* 关键：允许点击事件穿透这些层，点击背景或下层元素 */
+  z-index: 0; /* 默认层级，低于诗词容器 */
+}
+
+/* 为水波和花瓣容器设置不同的 z-index，确保它们在背景之上，但可以在诗词容器之下或之上 */
+#rippleCanvas {
+  z-index: 0; /* 在背景图之上，在花瓣和诗词容器之下 */
+}
+
+#petalContainer {
+  z-index: 1; /* 在水波之上，在诗词容器之下 */
+}
+
+/* === 新增：花瓣的样式和动画 === */
+.petal {
+  position: absolute; /* 相对于 petalContainer 定位 */
+  background-color: rgba(255, 200, 220, 0.7); /* 默认半透明粉色花瓣 */
+  border-radius: 50%; /* 默认圆形，JS会调整成椭圆 */
+  opacity: 0; /* 初始透明 */
+  pointer-events: none; /* 花瓣不影响点击 */
+  /* 这里 animation 名称和 timing function 会被 JS 动态设置 */
+}
+
+/* 花瓣飘落的核心动画 */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg); /* 从屏幕上方开始，初始旋转 */
+    opacity: 0; /* 初始完全透明 */
+  }
+  10% {
+    opacity: 1; /* 快速显现 */
+  }
+  90% {
+    opacity: 1; /* 保持可见 */
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg); /* 飘落到屏幕下方，完成旋转 */
+    opacity: 0; /* 最终再次透明 */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
