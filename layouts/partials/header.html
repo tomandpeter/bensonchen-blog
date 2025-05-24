@@ -51,6 +51,8 @@
     <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
     <link rel="stylesheet" href="{{ "/css/fonts.css" | relURL }}" />
     {{ partial "head_custom.html" . }}
+
+     <link rel="stylesheet" href="/css/custom.css" /> 
   </head>
 
   {{- $section := (replaceRE "^/([^/]+)/.*" "$1" .RelPermalink) -}}
@@ -64,6 +66,4 @@
     <article class="main">
       <header class="title">
       {{ partial "meta.html" . }}
-
-      <link rel="stylesheet" href="/css/custom.css" /> 
       </header>
